@@ -659,4 +659,4 @@ exp23 <- exp23 %>% mutate(mesh_num = case_when((net == 1 & panel == 1)|
 
 #### WRITE FINAL DATAFRAME TO A CSV ----
 write.csv(habData_master, "C:\\Documents\\Pyramid_Lake\\RCreations\\csv_files\\habData_23.csv", row.names=FALSE)
-write.csv(core23, "C:\\Documents\\Pyramid_Lake\\RCreations\\csv_files\\core23.csv", row.names=FALSE)
+write.csv(exp23, "C:\\RCreations\\csv_files\\exp23.csv", row.names=FALSE)

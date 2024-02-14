@@ -1,6 +1,9 @@
 #### INSTALL PACKAGES ----
 library(ggplot2)
 library(dplyr)
+library(cowplot)
+
+theme_set(theme_cowplot(font_size=12))
 
 ################################################################################
 ####                           FULL NETS 22                                 ####
@@ -100,3 +103,25 @@ cmecs_bar3 <- ggplot(exp23, aes(x=cmecs_reduce_ord, fill=cmecs_reduce_ord)) +
   geom_bar() +
   theme(axis.text = element_text(angle = 45))
 cmecs_bar3
+
+#### NETS CATEGORIZED WITH SCUBA VS. HYDRO
+habitatTypeCompare <- subset(exp23, select = c("med_depth_m", "date_hydro"))
+scuba <- filter(habitatTypeCompare, is.na(date_hydro))
+hydro <- filter(habitatTypeCompare, !is.na(date_hydro))
+
+scub_hydro <- ggplot() +
+  geom_histogram(scuba, mapping=aes(x = med_depth_m, y = after_stat(density)), fill="darkslategray4", alpha = 0.6) +
+  geom_text(aes(x=15, y=0.10, label="SCUBA"), color="black", size = 6) +
+  geom_histogram(hydro, mapping=aes(x = med_depth_m, y = -after_stat(density)), fill= "#404080", alpha = 0.6) +
+  geom_text( aes(x=4.5, y=-0.1, label="Hydroacoustic"), color="black", size = 6) +
+  xlab("Median Net Depth") +
+  ylab("")
+scub_hydro
+
+
+# export
+setwd("C:\\RCreations\\ROutput\\SCUBA")
+
+png(filename = "SCUBAvHydroDist.png", units = "in", width = 8, height = 6, res=600)
+scub_hydro
+dev.off()

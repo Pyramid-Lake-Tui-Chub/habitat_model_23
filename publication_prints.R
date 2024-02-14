@@ -55,18 +55,7 @@ png(filename = "predict_veg.png", units = "in", width = 8, height = 6, res=600)
 predict_cpue_veg
 dev.off()
 
-# combined!
-setwd("C:\\Documents\\Pyramid_Lake\\RCreations\\ROutput")
 
-png(filename = "predict_all.png", units = "in", width = 8, height = 6, res=600)
-right_column <- plot_grid(predict_cpue_veg, predict_cpue_slope, predict_cpue_mesh, ncol = 1)
-left_column <- plot_grid(predict_cpue_sub, predict_cpue_temp, ncol = 1)
-p <- plot_grid(left_column, right_column, align = "h", rel_widths = c(1,.6),
-               ncol = 2)
-y.grob <- textGrob("Fecund Tui Chub (fish/hr)", 
-                   gp=gpar(col="black", fontsize=10), rot=90)
-grid.arrange(arrangeGrob(p, left = y.grob))
-dev.off()
 
 ################################################################################
 ## DEPTH VS. TEMP ##
